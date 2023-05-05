@@ -2,7 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { DefaultResponseMsg } from '../../../types/DefaultResponseMsg';
 import { RegisterUserRequest } from '../../../types/RegisterUserRequest';
 import { UserModel } from '../../../models/UserModel';
-
+import { MongoDBconnect } from '../../../middlewares/MongoDBconnect';
+import md5 from 'md5';
 
 const endpointRegisterUser = async (
     req : NextApiRequest,
@@ -24,10 +25,21 @@ const endpointRegisterUser = async (
                 return res.status(400).json({ error : 'Password not valid.' });
             }
 
-            await UserModel.create(user);
+            const usersWithSameEmail = await UserModel.find({ email : user.email});
+            if(usersWithSameEmail && usersWithSameEmail.length > 0) {
+                return res.status(400).json({ error : 'An user with the same email already exists.' });
+            }
+
+            const userToBeSaved = {
+                name : user.name,
+                email : user.email,
+                password : md5(user.password)
+            }
+
+            await UserModel.create(userToBeSaved);
             return res.status(200).json({ msg : 'User registered successfully!'});
         }
         return res.status(405).json({ error : 'Informed method is not valid.' }); // 405: action not allowed
     }
 
-    export default endpointRegisterUser;
+    export default MongoDBconnect(endpointRegisterUser);

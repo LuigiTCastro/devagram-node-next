@@ -33,3 +33,9 @@ O Mongoose é uma biblioteca do Node.js que fornece uma solução baseada em esq
 
 `export type`
 _se você tem uma interface User definida em um arquivo types.ts e deseja usá-la em outro arquivo, você pode exportar essa interface usando export type User no arquivo types.ts. Em seguida, você pode importar essa interface no outro arquivo com import { User } from './types'. Isso ajuda a manter suas definições de tipos organizadas e reutilizáveis em todo o seu projeto._
+
+
+__IMPORTANTS LIBS__
+> npm i moment -> lib to format date.
+> npm i mongoose -> lib to work with schemas and mongoDB.
+> npm i md5 (npm i --save-dev@typesmd5) -> lib to encrypt passwords.
