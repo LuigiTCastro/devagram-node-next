@@ -27,6 +27,9 @@ Schema: esquema.
 Uma forma de se fazer algo. Passo a passo de execuçao.
 
 
+# MONGOOSE
+O Mongoose é uma biblioteca do Node.js que fornece uma solução baseada em esquemas para modelar os dados da aplicação e interagir com o MongoDB, um banco de dados NoSQL. Ele fornece uma maneira fácil de definir e validar a estrutura dos dados, bem como suporte para consultas e operações CRUD. O Mongoose é frequentemente usado em aplicativos Node.js que precisam de um banco de dados flexível e escalável para armazenar dados complexos.
+
 
 `export type`
 _se você tem uma interface User definida em um arquivo types.ts e deseja usá-la em outro arquivo, você pode exportar essa interface usando export type User no arquivo types.ts. Em seguida, você pode importar essa interface no outro arquivo com import { User } from './types'. Isso ajuda a manter suas definições de tipos organizadas e reutilizáveis em todo o seu projeto._

@@ -1,9 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from "next";
-import { DefaultResponseMsg } from "../../../types/DefaultResponseMsg";
-import { RegisterUserRequest } from "../../../types/RegisterUserRequest";
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { DefaultResponseMsg } from '../../../types/DefaultResponseMsg';
+import { RegisterUserRequest } from '../../../types/RegisterUserRequest';
+import { UserModel } from '../../../models/UserModel';
 
 
-const endpointRegisterUser = (
+const endpointRegisterUser = async (
     req : NextApiRequest,
     res : NextApiResponse<DefaultResponseMsg>
 ) => {
@@ -23,7 +24,8 @@ const endpointRegisterUser = (
                 return res.status(400).json({ error : 'Password not valid.' });
             }
 
-            return res.status(200).json({ msg : 'Registered successfully!'});
+            await UserModel.create(user);
+            return res.status(200).json({ msg : 'User registered successfully!'});
         }
         return res.status(405).json({ error : 'Informed method is not valid.' }); // 405: action not allowed
     }
