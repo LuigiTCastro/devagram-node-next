@@ -50,6 +50,10 @@ Client[HttpRequest] > Authentication Endpoint API > Authentication > JWT Token s
     > Signature <!-- only signature of each token (generated through of a encrypt algorithm) -->
 
 
+# HANDLER
+Is a function that processes the received `requests` by web server and sends the `response` to the client.
+Its usually defined as a middleware in some Frameworks, receiving the request/response as paramethers.
+Operations realizeds: validation, authentication, database queries, sending the reply.
 
 
 
