@@ -1,3 +1,5 @@
+// PUBLIC ROUTE, THEN ITS NOT NECESSARY BE LOGGED TO DO REGISTER.
+
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { DefaultResponseMsg } from '../../../types/DefaultResponseMsg';
 import { RegisterUserRequest } from '../../../types/RegisterUserRequest';
@@ -42,4 +44,4 @@ const endpointRegisterUser = async (
         return res.status(405).json({ error : 'Informed method is not valid.' }); // 405: action not allowed
     }
 
-    export default MongoDBconnect(endpointRegisterUser);
+    export default MongoDBconnect(endpointRegisterUser); // Connect with db before registering user.

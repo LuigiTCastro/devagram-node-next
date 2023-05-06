@@ -69,3 +69,11 @@ __IMPORTANTS LIBS__
 > npm i mongoose -> lib to work with schemas and mongoDB.
 > npm i md5 (npm i --save-dev @types/md5) -> lib to encrypt passwords.
 > npm i jsonwebtoken -> lib to generate token.
+
+__Global Token to Postamn__
+Syntax (in TESTS): 
+<var jsonData = JSON.parse(responseBody)>
+<postman.setGlobalVariable('nameToken', jsonData.token)>
+
+Syntax (in a header AUTHORIZATON):
+`{{nameToken}}`

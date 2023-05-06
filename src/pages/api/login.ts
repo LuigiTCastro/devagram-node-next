@@ -1,3 +1,5 @@
+// PUBLIC ROUTE, THEN ITS NOT NECESSARY BE LOGGED TO DO LOGIN.
+
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { MongoDBconnect } from '../../../middlewares/MongoDBconnect';
 import { DefaultResponseMsg } from '../../../types/DefaultResponseMsg';
