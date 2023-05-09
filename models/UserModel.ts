@@ -13,3 +13,6 @@ const UserSchema = new Schema({
 export const UserModel = (mongoose.models.users || mongoose.model('users', UserSchema));
 
 // export const UserModel = mongoose.models.users ?? mongoose.model('users', UserSchema);
+
+
+// Models are the CLASSES that allow to realize operations on the database (insert, read, update, delete records)_
