@@ -1,3 +1,5 @@
+# <!-- AUTHENTICATION AND INTEGRATION WITH DATABASE  -->
+
 # PROJECT ENVIRONMENTS
 > DEVELOPMENT Environment 
 > TEST Environment
@@ -84,6 +86,7 @@ __IMPORTANTS LIBS__
 > npm i mongoose -> lib to work with schemas and mongoDB.
 > npm i md5 (npm i --save-dev @types/md5) -> lib to encrypt passwords.
 > npm i jsonwebtoken -> lib to generate token.
+> npm i multer next-connect, cosmicjs -> gerenciador de conteudos (npm i --save-dev @types/multer)
 
 __Global Token to Postamn__
 Syntax (in TESTS): 
@@ -92,3 +95,34 @@ Syntax (in TESTS):
 
 Syntax (in a header AUTHORIZATON):
 `{{nameToken}}`
+
+
+------------------------------------------------------
+
+
+# <!-- IMAGES STORAGE -->
+
+Formas de armazenar imagens do projeto: cloud, pasta/diretorio do servidor, banco de dados ou CMS...
+
+# CMS [ContentManagementSystem] <!-- sistema de gerenciamento de conteudos -->
+They change the contens without having to upload a new version of source code.
+
+<!-- famous CMS: wordpress (depende de um servidor rodando) -->
+
+# CMS HEADLESS [ex:COSMIC]
+Cosmic é um Headless CMS que te permite criar, editar e gerenciar conteudos atraves de diversos websites e aplicações com apenas uma interface.
+
+_create account_
+_create project_
+_create buckets_
+_access settings_ > _api access_ [BucketSlug,ReadKey,WriteKey]
+
+
+# MULTER
+Middleware node.js para manipulação `multipart/form-data`. Usado principalmente para fazer upload de arquivos. (endpoint muda de json para multipart/form-data).
+Lib que apoia os endpoints a controlar o arquivo enviado no data da requisição para poder adiciona-lo no Cosmic.
+
+
+
+__Take Note!__
+Enquanto no CMS, o conteúdo é criado, gerenciado e exibido em uma plataforma centralizada que cuida tanto do back-end quanto do front-end, no CMS Headless, o back e o front são completamente separados. O CMS Headless fornece apenas o back-end para gerenciamento do conteúdo, enquanto a aplicação cliente é responsável por consumir e exibir esse conteúdo de forma personalizada, utilizando APIs ou serviços web.
