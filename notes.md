@@ -97,7 +97,7 @@ Syntax (in a header AUTHORIZATON):
 `{{nameToken}}`
 
 
-------------------------------------------------------
+---------------------------------------------------------------------
 
 
 # <!-- IMAGES STORAGE -->
@@ -126,3 +126,14 @@ Lib que apoia os endpoints a controlar o arquivo enviado no data da requisição
 
 __Take Note!__
 Enquanto no CMS, o conteúdo é criado, gerenciado e exibido em uma plataforma centralizada que cuida tanto do back-end quanto do front-end, no CMS Headless, o back e o front são completamente separados. O CMS Headless fornece apenas o back-end para gerenciamento do conteúdo, enquanto a aplicação cliente é responsável por consumir e exibir esse conteúdo de forma personalizada, utilizando APIs ou serviços web.
+
+__Take Note!__
+`process.env`
+Is an object which contains all environment variables defined in the operating system.
+`{}`
+As {} são usadas para fazer uma desestruturação do objeto process.env, que contém as variáveis de ambiente do sistema operacional. Ao usar as {} dessa forma, é possível criar novas variáveis no escopo do módulo, que terão como valor o valor das variáveis de ambiente correspondentes.
+
+
+
+
+
