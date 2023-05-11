@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { JWTTokenValidate } from "../../../middlewares/JWTTokenValidate";
+import { JWTTokenValidate } from "../../middlewares/JWTTokenValidate";
 
 const endpointUser = (
     req : NextApiRequest,

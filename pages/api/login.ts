@@ -1,10 +1,10 @@
 // PUBLIC ROUTE, THEN ITS NOT NECESSARY BE LOGGED TO DO LOGIN.
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { MongoDBconnect } from '../../../middlewares/MongoDBconnect';
-import { DefaultResponseMsg } from '../../../types/DefaultResponseMsg';
-import { LoginResponse } from '../../../types/LoginResponse';
-import { UserModel } from '../../../models/UserModel';
+import { MongoDBconnect } from '../../middlewares/MongoDBconnect';
+import { DefaultResponseMsg } from '../../types/DefaultResponseMsg';
+import { LoginResponse } from '../../types/LoginResponse';
+import { UserModel } from '../../models/UserModel';
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 

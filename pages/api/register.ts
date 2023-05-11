@@ -1,12 +1,12 @@
 // PUBLIC ROUTE, THEN ITS NOT NECESSARY BE LOGGED TO DO REGISTER.
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { DefaultResponseMsg } from '../../../types/DefaultResponseMsg';
-import { RegisterUserRequest } from '../../../types/RegisterUserRequest';
-import { UserModel } from '../../../models/UserModel';
-import { MongoDBconnect } from '../../../middlewares/MongoDBconnect';
+import { DefaultResponseMsg } from '../../types/DefaultResponseMsg';
+import { RegisterUserRequest } from '../../types/RegisterUserRequest';
+import { UserModel } from '../../models/UserModel';
+import { MongoDBconnect } from '../../middlewares/MongoDBconnect';
 import md5 from 'md5';
-import { upload, imagesUploadCosmic } from '../../../services/imagesUploadCosmic';
+import { upload, imagesUploadCosmic } from '../../services/imagesUploadCosmic';
 // const nc = require('next-connect');
 import nc from 'next-connect';
 
@@ -16,6 +16,9 @@ const handler = nc()
         req : NextApiRequest,
         res : NextApiResponse<DefaultResponseMsg>
     ) => {
+        try {
+            // console.log('endpoint register', req.body);
+
             const user = req.body as RegisterUserRequest;
             
             if(!user.name || user.name.length < 2 ) {
@@ -33,6 +36,7 @@ const handler = nc()
 
             // validation if already exists an user with same email
             const usersWithSameEmail = await UserModel.find({ email : user.email});
+            
             if(usersWithSameEmail && usersWithSameEmail.length > 0) {
                 return res.status(400).json({ error : 'An user with the same email already exists.' });
             }
@@ -49,8 +53,15 @@ const handler = nc()
             }              
 
             await UserModel.create(userToBeSaved);
+            console.log('endpoint register', req.body.file);
             return res.status(200).json({ msg : 'User registered successfully!'});
-        });
+        }
+        catch(e) {
+            console.log(e);
+            return res.status(500).json({ error : 'Error to register user.' });
+        }
+    });
+            
 
 // const endpointRegisterUser = async (
 //     req : NextApiRequest,
@@ -67,10 +78,8 @@ const handler = nc()
         api: {
             bodyParser: false // significa que nesta api, o bodyparser nao transformará em json.
         }
-    }
-
-    // com isso, torna-se necessario passar no body (no postman) FORM-DATA em vez de RAW(JSON).
-    // alem disso, FORM-DATA trabalha com CHAVE-VALOR.
-    // importante lembrar de passar a chave FILE.
+    }   // com isso, torna-se necessario passar no body (no postman) FORM-DATA em vez de RAW(JSON).
+        // alem disso, FORM-DATA trabalha com CHAVE-VALOR.
+        // importante lembrar de passar a chave FILE.
 
     export default MongoDBconnect(handler); // Connect with db before registering user.
