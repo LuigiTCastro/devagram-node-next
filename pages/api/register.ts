@@ -5,8 +5,8 @@ import { DefaultResponseMsg } from '../../types/DefaultResponseMsg';
 import { RegisterUserRequest } from '../../types/RegisterUserRequest';
 import { UserModel } from '../../models/UserModel';
 import { MongoDBconnect } from '../../middlewares/MongoDBconnect';
-import md5 from 'md5';
 import { upload, imagesUploadCosmic } from '../../services/imagesUploadCosmic'; // Upload do Multer, Upload da imagem pro cosmic.
+import md5 from 'md5';
 import nc from 'next-connect';
 
 const handler = nc()
