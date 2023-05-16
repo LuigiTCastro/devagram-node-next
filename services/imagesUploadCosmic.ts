@@ -1,5 +1,5 @@
 import multer from 'multer';
-import cosmicjs from 'cosmicjs'
+import cosmicjs from 'cosmicjs';
 
 const { WRITE_KEY_AVATARS,
         WRITE_KEY_PUBLICATIONS,
@@ -24,7 +24,8 @@ const upload = multer({ storage : storage });
 const imagesUploadCosmic = async(req : any) => {
     
     // console.log(WRITE_KEY_AVATARS);
-    console.log(req)
+    console.log(req.body)
+    console.log(req.file.originalname)
     
     if(req?.file?.originalname) {
         const media_object = {
@@ -37,6 +38,8 @@ const imagesUploadCosmic = async(req : any) => {
         else {
             return avatarsBucket.addMedia({ media : media_object })
         }
+
+        console.log(req.upload);
     }
 }
 

@@ -74,11 +74,11 @@ const handler = nc()
 //         return res.status(405).json({ error : 'Informed method is not valid.' }); // 405: action not allowed
 //     }
 
-    // export const config = { // exporta-se essa config para alterar configuraçao padrao do next
-    //     api: {
-    //         bodyParser: false // significa que nesta api, o bodyparser nao transformará em json.
-    //     }
-    // }   // com isso, torna-se necessario passar no body (no postman) FORM-DATA em vez de RAW(JSON).
+    export const config = { // exporta-se essa config para alterar configuraçao padrao do next
+        api: {
+            bodyParser: false // significa que nesta api, o bodyparser nao transformará em json.
+        }
+    }   // com isso, torna-se necessario passar no body (no postman) FORM-DATA em vez de RAW(JSON).
         // alem disso, FORM-DATA trabalha com CHAVE-VALOR.
         // importante lembrar de passar a chave FILE.
 

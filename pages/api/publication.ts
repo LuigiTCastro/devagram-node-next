@@ -77,7 +77,7 @@
 // }
 
 // export default JWTTokenValidate(MongoDBconnect(handler));
-// // export default JWTTokenValidate(MongoDBconnect(endpointPublication));
+
 
 
 
@@ -97,7 +97,7 @@ import { PublicationModel } from '../../models/PublicationModel';
 import { UserModel } from '../../models/UserModel';
 
 const handler = nc()
-    // .use(upload.single('file'))
+    .use(upload.single('file'))
     .post(async (req : any, res : NextApiResponse<DefaultResponseMsg>) => {
         try{
             const {userId} = req.query;
@@ -115,20 +115,20 @@ const handler = nc()
                 return res.status(400).json({error : 'description nao e valida'});
             }
     
-            // if(!req.file || !req.file.originalname){
-            //     return res.status(400).json({error : 'Imagem e obrigatoria'});
-            // }
+            if(!req.file || !req.file.originalname){
+                return res.status(400).json({error : 'Imagem e obrigatoria'});
+            }
 
             const image = await imagesUploadCosmic(req);
             const publicacao = {
                 userId : user._id,
                 description,
-                // image : image.media.url,
+                image : image.media.url,
                 date : new Date()
             }
 
-            user.publicacoes++;
-            await UserModel.findByIdAndUpdate({_id : user._id}, user);
+            // user.publicacoes++;
+            // await UserModel.findByIdAndUpdate({_id : user._id}, user);
 
             await PublicationModel.create(publicacao);
             return res.status(200).json({msg : 'Publicacao criada com sucesso'});
@@ -138,10 +138,11 @@ const handler = nc()
         }
 });
 
-// export const config = {
-//     api : {
-//         bodyParser : false
-//     }
-// }
+export const config = {
+    api : {
+        bodyParser : false
+    }
+}
 
 export default JWTTokenValidate(MongoDBconnect(handler)); 
+
