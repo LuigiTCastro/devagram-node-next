@@ -134,6 +134,13 @@ Is an object which contains all environment variables defined in the operating s
 As {} são usadas para fazer uma desestruturação do objeto process.env, que contém as variáveis de ambiente do sistema operacional. Ao usar as {} dessa forma, é possível criar novas variáveis no escopo do módulo, que terão como valor o valor das variáveis de ambiente correspondentes.
 
 
+# BODY x QUERY
+[Body]: used in http POST/PUT methods requests, because the data sending are make in the body of request.
+[Query]: used in http GET method requests, because the data sending are make in the query (url) of request.
+
+**Tudo que é consulta vai no query / tudo que é envio de informação é no body.
+
+
 
 
 
