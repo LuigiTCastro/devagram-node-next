@@ -11,19 +11,34 @@ const endpointSearch = async (req: NextApiRequest, res: NextApiResponse<DefaultR
 
         if (req.method === 'GET') {
 
-            const { filter } = req.query;
+            if (req?.query?.id) {
 
-            if (!filter || filter.length < 2) {
-                return res.status(400).json({ error: 'Please, inform more than two characters.' });
+                const userFound = await UserModel.findById(req?.query?.id);
+
+                if (!userFound) {
+                    return res.status(400).json({ error: 'User not found.' });
+                }
+
+                userFound.password = null;
+                return res.status(200).json(userFound);
             }
 
-            const usersFound = await UserModel.find({
-                $or: [{ name: { $regex: filter, $options: 'i' } },
+            else {
+
+                const { filter } = req.query;
+
+                if (!filter || filter.length < 2) {
+                    return res.status(400).json({ error: 'Please, inform more than two characters.' });
+                }
+
+                const usersFound = await UserModel.find({
+                    $or: [{ name: { $regex: filter, $options: 'i' } },
                     { email: { $regex: filter, $options: 'i' } }]
 
-            });
+                });
 
-            return res.status(200).json(usersFound);
+                return res.status(200).json(usersFound);
+            }
         }
 
         return res.status(405).json({ error: 'Http method not valid.' });
