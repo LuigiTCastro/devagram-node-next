@@ -24,8 +24,8 @@ const endpointFeed = async (
                 }   
 
                 const publications = await PublicationModel
-                    .find({ userId: user._id })
-                    .sort({ date: -1 }); // Enquanto FINDBYID busca uma informação, FIND busca uma lista de informações.
+                    .find({ userId: user._id }) // Enquanto FINDBYID busca uma informação, FIND busca uma lista de informações.
+                    .sort({ date: -1 }); // Sort: ordenar.
 
                 return res.status(200).json(publications);
             }

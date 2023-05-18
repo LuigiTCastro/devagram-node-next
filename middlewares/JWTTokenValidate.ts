@@ -4,7 +4,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 
 export const JWTTokenValidate = (handler : NextApiHandler) => async (
     req : NextApiRequest,
-    res : NextApiResponse<DefaultResponseMsg>
+    res : NextApiResponse<DefaultResponseMsg | any[]>
 ) => {
 
     try {

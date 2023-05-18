@@ -120,7 +120,7 @@ _access settings_ > _api access_ [BucketSlug,ReadKey,WriteKey]
 
 # MULTER
 Middleware node.js para manipulação `multipart/form-data`. Usado principalmente para fazer upload de arquivos. (endpoint muda de json para multipart/form-data).
-Lib que apoia os endpoints a controlar o arquivo enviado no data da requisição para poder adiciona-lo no Cosmic.
+Lib que apoia os endpoints a controlar o arquivo enviado na data da requisição para poder adiciona-lo no Cosmic.
 
 
 
@@ -141,6 +141,16 @@ As {} são usadas para fazer uma desestruturação do objeto process.env, que co
 **Tudo que é consulta vai no query / tudo que é envio de informação é no body.
 
 
+# API REST [HttpMethods]
+No padrão de APIs REST, a propriedade da requisição que identifica a operação a realizar é o ``método HTTP``. 
+
+Os métodos HTTP mais comuns são:
+    _GET: Utilizado para recuperar informações de um recurso._
+    _POST: Utilizado para criar um novo recurso._
+    _PUT: Utilizado para atualizar um recurso existente._
+    _DELETE: Utilizado para remover um recurso._
+
+Ao enviar uma requisição, o cliente deve especificar o método HTTP correto para indicar a operação desejada (geralmente incluída no cabeçalho da requisição).
 
 
 
