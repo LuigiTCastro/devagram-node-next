@@ -2,21 +2,21 @@ import multer from 'multer';
 import cosmicjs from 'cosmicjs';
 
 const { 
-    CHAVE_GRAVACAO_AVATARES,
-    BUCKET_AVATARES,
+    WRITE_KEY_AVATARS,
+    BUCKET_SLUG_AVATARS,
     WRITE_KEY_PUBLICATIONS,
-    BUCKET_PUBLICATIONS 
+    BUCKET_SLUG_PUBLICATIONS 
 } = process.env;
 
 const Cosmic = cosmicjs();
 
 const avatarsBucket = Cosmic.bucket({
-    slug: BUCKET_AVATARES,
-    write_key: CHAVE_GRAVACAO_AVATARES
+    slug: BUCKET_SLUG_AVATARS,
+    write_key: WRITE_KEY_AVATARS
 });
 
 const publicationsBucket = Cosmic.bucket({
-    slug: BUCKET_PUBLICATIONS,
+    slug: BUCKET_SLUG_PUBLICATIONS,
     write_key: WRITE_KEY_PUBLICATIONS
 });
 
