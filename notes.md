@@ -46,6 +46,21 @@ __To use the Mongoose in a Node.js project:__
     _Use the Models to do queries and manipulate datas in MongoDB._
 
 
+<mongoose.model>:
+    Usada para definir e criar um modelo (model) do Mongoose para uma determinada collection no MongoDB. Ao chamar mongoose.model('NomeModel', schema), o Mongoose mapeia o modelo especificado (NomeModel) ao schema fornecido, permitindo realizar operações no banco de dados usando esse modelo.
+    Se a collection correspondente ainda não existir no MongoDB, o Mongoose irá criá-la.
+
+<import mongoose, { Schema } from 'mongoose'>:
+    'mongoose': lib de interação com o banco de dados.
+    mongoose: nome dado ao modulo.
+    {Schema}: classe importada do modulo mongoose.
+
+Utilzar o recurso ``{class}`` permite importar a classe específica e desejada em vez de importar o módulo inteiro, nao trazendo o que nao interessa. ``{Importação Desestruturada}``
+
+[Schema]: define a estrutura dos documentos em uma coleção do MongoDB; fornece uma maneira de modelar e organizar os dados que serão armazenados no banco de dados.
+
+
+
 # JWT [JsonWebToken] AUTHENTICATION
 Lib que valida a camada de seguranca.
 Declaracoes seguras JWT entre duas partes.
@@ -154,3 +169,7 @@ Ao enviar uma requisição, o cliente deve especificar o método HTTP correto pa
 
 
 
+
+
+<req?.query?.id>
+ A interrogação é usada para verificar se a propriedade query existe no objeto req e se a propriedade id existe no objeto query. Se qualquer uma dessas propriedades não existir, a expressão inteira retornará undefined, sem gerar um erro. Em resumo, o uso da interrogação neste contexto é uma forma de lidar com a possibilidade de valores nulos ou indefinidos em objetos aninhados, tornando o código mais seguro e menos propenso a erros.

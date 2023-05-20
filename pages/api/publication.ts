@@ -1,4 +1,4 @@
-// // PRIVATE ROUTE. SO ITS NECESSARY TO BE LOGGED TO MAKE A PUBLICATION.
+// PRIVATE ROUTE. SO ITS NECESSARY TO BE LOGGED TO MAKE A PUBLICATION.
 
 // import { imagesUploadCosmic, upload } from "../../services/imagesUploadCosmic";
 // import { DefaultResponseMsg } from "../../types/DefaultResponseMsg";
@@ -30,7 +30,7 @@
 
 //             const { description } = req?.body;
 
-//             if(!description || description < 2) {
+//             if(!description || description.length < 2) {
 //                 return res.status(400).json({ error: 'Description is not valid.' });
 //             }
             

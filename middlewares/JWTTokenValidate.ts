@@ -48,3 +48,6 @@ export const JWTTokenValidate = (handler : NextApiHandler) => async (
     
     return handler(req, res);
 }
+
+
+// token ativo = usuario autenticado OU usuario LOGADO! (quem esta fazendo as açoes).

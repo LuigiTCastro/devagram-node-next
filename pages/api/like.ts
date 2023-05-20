@@ -31,6 +31,7 @@ const endpointLike = async (req: NextApiRequest, res: NextApiResponse<DefaultRes
 
             if (userIndexOnLike != -1) {
                 // if index is bigger than -1: the user already liked the publication.
+                // splice: Removes itens in a determined list index.
                 publication.likes.splice(userIndexOnLike, 1); // splice: removes a container from the array (informing the index, and the quantity from then on).
                 await PublicationModel.findByIdAndUpdate({ _id: publication._id }, publication);
                 return res.status(200).json({ msg: 'Publication disliked successfully.' });
@@ -38,10 +39,13 @@ const endpointLike = async (req: NextApiRequest, res: NextApiResponse<DefaultRes
 
             else {
                 // if index equals -1: the user still does not like the publication.
+                // push: adds an iten in the end of the list.
                 publication.likes.push(user._id); // adds a new userId in the likes array.
                 await PublicationModel.findByIdAndUpdate({ _id: publication._id }, publication) // finds the publication and updates with the new data.
                 return res.status(200).json({ msg: 'Publication liked successfully.' });
             }
+            // TOGGLE BEHAVIOR: active/inactive, follow/unfollow. (always PUT).
+            // Toggle are usually a metaphor to light switches that give the choice between on and off.
         }
 
         return res.status(405).json({ error: 'Informed method not valid.' });
