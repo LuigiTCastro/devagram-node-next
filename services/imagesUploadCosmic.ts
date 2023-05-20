@@ -25,7 +25,6 @@ const upload = multer({ storage : storage });
 
 const imagesUploadCosmic = async(req : any) => {
     
-    // console.log(WRITE_KEY_AVATARS);
     console.log(req.body)
     console.log(req.file.originalname)
     

@@ -53,8 +53,6 @@ const handler = nc() // handler: endpoint that receives an next-connect instance
             }
 
             await UserModel.create(userToBeSaved);
-
-            console.log('endpoint register', req.body.file);
             return res.status(200).json({ msg: 'User registered successfully!' });
         }
         catch (e) {
@@ -62,18 +60,6 @@ const handler = nc() // handler: endpoint that receives an next-connect instance
             return res.status(500).json({ error: 'Error when registering user.' });
         }
     });
-
-
-// const endpointRegisterUser = async (
-//     req : NextApiRequest,
-//     res : NextApiResponse<DefaultResponseMsg>
-// ) => {
-//  if(req.method === 'POST') 
-//  {
-//      ...
-//  }
-//         return res.status(405).json({ error : 'Informed method is not valid.' }); // 405: action not allowed
-//     }
 
 export const config = { // exporta-se essa config para alterar configuraçao padrao do next
     api: {
