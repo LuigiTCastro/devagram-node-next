@@ -4,6 +4,7 @@ import { MongoDBconnect } from "../../middlewares/MongoDBconnect";
 import { PublicationModel } from "../../models/PublicationModel";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { UserModel } from "../../models/UserModel";
+import { FollowerModel } from "../../models/FollowerModel";
 
 const endpointFeed = async (
     req: NextApiRequest,
@@ -22,19 +23,46 @@ const endpointFeed = async (
                 if (!user) {
                     return res.status(400).json({ error: 'User not found!' });
                 }   
-
+                
                 const publications = await PublicationModel
                     .find({ userId: user._id }) // Enquanto FINDBYID busca uma informação, FIND busca uma lista de informações.
                     .sort({ date: -1 }); // Sort: ordenar.
 
                 return res.status(200).json(publications);
             }
+
+            else {
+
+                const { userId } = req?.query;
+                const loggedUser = await UserModel.findById(userId);
+
+                if(!loggedUser) {
+                    return res.status(400).json({ error: 'User not found!' });
+                }
+
+                const followers = await FollowerModel.find({ userId : loggedUser.id });
+                const followersIds = await followers.map( f => f.followedUserId );
+
+                const publications = await PublicationModel.find({
+                    $or : [
+                        { userId : loggedUser._id },
+                        { userId : followersIds }
+                    ]
+                })
+                .sort({ data : -1 })
+                // In the relational database, its possible to sort in ASC or DESC.
+                // But in the non-relational database, to sort, its necessary to use the numbers 1 / -1
+                // 1: ASC | -1: DESC (in case of date, it means from the most recent date to the oldest date).
+
+                return res.status(200).json( publications );
+            }
         }
+        return res.status(405).json({ error: 'Method not valid!' });
     }
 
     catch (e) {
         console.log(e)
-        return res.status(400).json({ error: 'Method not valid!' });
+        return res.status(400).json({ error: 'Error searching the feed.' });
     }
 }
 
