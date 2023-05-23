@@ -54,7 +54,21 @@ const endpointFeed = async (
                 // But in the non-relational database, to sort, its necessary to use the numbers 1 / -1
                 // 1: ASC | -1: DESC (in case of date, it means from the most recent date to the oldest date).
 
-                return res.status(200).json( publications );
+                const result = [];
+
+                for(const publi of publications) { // Itera todos os objetos json da collection publications, retornando as publi individualmente.
+                    const publicationUser = await UserModel.findById(publi.userId); // Busca o usuario da publicaçao (publi por publi).
+
+                    if(publicationUser) {
+                        const final = {...publi._doc, user : { // Retorna o json de cada publi e anexado a esta um novo json (...) nomeado de 'user' que traz consigo o nome e o avatar do usuario da publicacao.
+                            name : publicationUser.name,
+                            avatar : publicationUser.avatar
+                        }};
+
+                        result.push(final);
+                    };
+                };
+                return res.status(200).json(result);
             }
         }
         return res.status(405).json({ error: 'Method not valid!' });
