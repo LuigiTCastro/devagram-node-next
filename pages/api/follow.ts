@@ -27,7 +27,7 @@ const endpointFollow = async ( req : NextApiRequest, res : NextApiResponse<Defau
                 return res.status(400).json({ error: 'User to be followed not found.' });
             }
 
-            const userAlreadyFollowedByMe = await FollowerModel.find( { userId : loggedUser._id, id : userToBeFollowed._id }); 
+            const userAlreadyFollowedByMe = await FollowerModel.find( { userId : loggedUser._id, followedUserId : userToBeFollowed._id }); 
             // Makes a filter with two parameters: 1) gets who has the id of logged user. 2) gets who has the id of user to be followed.
             // The idea is to check if any relationship already exists between the users.
 
@@ -50,7 +50,7 @@ const endpointFollow = async ( req : NextApiRequest, res : NextApiResponse<Defau
                 const follower = {
                     userId : loggedUser._id,
                     followedUserId : userToBeFollowed._id
-                }
+                };
                 await FollowerModel.create(follower);
 
                 // Updates the FOLLOWING of the logged user.
@@ -58,7 +58,7 @@ const endpointFollow = async ( req : NextApiRequest, res : NextApiResponse<Defau
                 await UserModel.findByIdAndUpdate({ _id : loggedUser._id }, loggedUser);
 
                 // Updates the followed of the user to be followed.
-                userToBeFollowed.followed++;
+                userToBeFollowed.followers++;
                 await UserModel.findByIdAndUpdate({ _id : userToBeFollowed._id }, userToBeFollowed);
                 
                 return res.status(200).json({ msg: 'User followed successfully!' });
