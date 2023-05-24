@@ -5,6 +5,7 @@ import { MongoDBconnect } from "../../middlewares/MongoDBconnect";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { UserModel } from "../../models/UserModel";
 import nc from 'next-connect';
+import { CORSpolicy } from '../../middlewares/CORSpolicy';
 
 
 const handler = nc()
@@ -71,4 +72,4 @@ export const config = {
     }
 }
 
-export default JWTTokenValidate(MongoDBconnect(handler)); // first validate token, after authenticate the user.
+export default CORSpolicy(JWTTokenValidate(MongoDBconnect(handler))); // first validate token, after authenticate the user.

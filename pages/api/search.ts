@@ -3,6 +3,7 @@ import { DefaultResponseMsg } from "../../types/DefaultResponseMsg";
 import { MongoDBconnect } from "../../middlewares/MongoDBconnect";
 import { JWTTokenValidate } from "../../middlewares/JWTTokenValidate";
 import { UserModel } from "../../models/UserModel";
+import { CORSpolicy } from '../../middlewares/CORSpolicy';
 
 
 const endpointSearch = async (req: NextApiRequest, res: NextApiResponse<DefaultResponseMsg | any[]>) => {
@@ -50,4 +51,4 @@ const endpointSearch = async (req: NextApiRequest, res: NextApiResponse<DefaultR
     }
 }
 
-export default JWTTokenValidate(MongoDBconnect(endpointSearch));
+export default CORSpolicy(JWTTokenValidate(MongoDBconnect(endpointSearch)));

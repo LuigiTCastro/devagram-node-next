@@ -4,6 +4,7 @@ import { MongoDBconnect } from "../../middlewares/MongoDBconnect";
 import { JWTTokenValidate } from "../../middlewares/JWTTokenValidate";
 import { PublicationModel } from "../../models/PublicationModel";
 import { UserModel } from "../../models/UserModel";
+import { CORSpolicy } from "../../middlewares/CORSpolicy";
 
 const endpointLike = async (req: NextApiRequest, res: NextApiResponse<DefaultResponseMsg>) => {
 
@@ -61,4 +62,4 @@ const endpointLike = async (req: NextApiRequest, res: NextApiResponse<DefaultRes
     }
 }
 
-export default JWTTokenValidate(MongoDBconnect(endpointLike));
+export default CORSpolicy(JWTTokenValidate(MongoDBconnect(endpointLike)));

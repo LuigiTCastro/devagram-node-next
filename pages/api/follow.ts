@@ -4,6 +4,7 @@ import { JWTTokenValidate } from "../../middlewares/JWTTokenValidate";
 import { MongoDBconnect } from "../../middlewares/MongoDBconnect";
 import { UserModel } from "../../models/UserModel";
 import { FollowerModel } from "../../models/FollowerModel";
+import { CORSpolicy } from "../../middlewares/CORSpolicy";
 
 const endpointFollow = async ( req : NextApiRequest, res : NextApiResponse<DefaultResponseMsg>) => {
 
@@ -76,4 +77,4 @@ const endpointFollow = async ( req : NextApiRequest, res : NextApiResponse<Defau
     }
 }
 
-export default JWTTokenValidate(MongoDBconnect(endpointFollow)); // This sequence means to use all middlewares.
+export default CORSpolicy(JWTTokenValidate(MongoDBconnect(endpointFollow))); // This sequence means to use all middlewares.

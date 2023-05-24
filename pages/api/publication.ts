@@ -85,6 +85,7 @@ import { MongoDBconnect } from "../../middlewares/MongoDBconnect";
 import { JWTTokenValidate } from "../../middlewares/JWTTokenValidate";
 import { PublicationModel } from '../../models/PublicationModel';
 import { UserModel } from '../../models/UserModel';
+import { CORSpolicy } from "../../middlewares/CORSpolicy";
 
 const handler = nc()
     .use(upload.single('file'))
@@ -138,5 +139,5 @@ export const config = {
     }
 }
 
-export default JWTTokenValidate(MongoDBconnect(handler)); 
+export default CORSpolicy(JWTTokenValidate(MongoDBconnect(handler))); 
 

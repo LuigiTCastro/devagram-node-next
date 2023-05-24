@@ -7,6 +7,7 @@ import { LoginResponse } from '../../types/LoginResponse';
 import { UserModel } from '../../models/UserModel';
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
+import { CORSpolicy } from "../../middlewares/CORSpolicy";
 
 const endpointLogin = async (
     req: NextApiRequest,
@@ -42,4 +43,4 @@ const endpointLogin = async (
     return res.status(405).json({ error: 'Informed method is not valid.' }); // 405: action not allowed
 }
 
-export default MongoDBconnect(endpointLogin); // first middleware, after endpoint.
+export default CORSpolicy(MongoDBconnect(endpointLogin)); // first middleware, after endpoint.

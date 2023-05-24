@@ -8,6 +8,7 @@ import { MongoDBconnect } from '../../middlewares/MongoDBconnect';
 import { upload, imagesUploadCosmic } from '../../services/imagesUploadCosmic'; // Upload do Multer, Upload da imagem pro cosmic.
 import md5 from 'md5';
 import nc from 'next-connect';
+import { CORSpolicy } from '../../middlewares/CORSpolicy';
 
 const handler = nc() // handler: endpoint that receives an next-connect instance.
     .use(upload.single('file')) // upload: midleware from multer. single: accepts just one image. 'file': name of the field to pass as key in the form-data (postman) 
@@ -69,4 +70,4 @@ export const config = { // exporta-se essa config para alterar configuraçao pad
 // alem disso, FORM-DATA trabalha com CHAVE-VALOR.
 // importante lembrar de passar a chave FILE.
 
-export default MongoDBconnect(handler); // Connect with db before registering user.
+export default CORSpolicy(MongoDBconnect(handler)); // Connect with db before registering user.

@@ -4,6 +4,7 @@ import { MongoDBconnect } from "../../middlewares/MongoDBconnect";
 import { DefaultResponseMsg } from "../../types/DefaultResponseMsg";
 import { UserModel } from "../../models/UserModel";
 import { PublicationModel } from "../../models/PublicationModel";
+import { CORSpolicy } from "../../middlewares/CORSpolicy";
 
 const endpointComments = async (req: NextApiRequest, res: NextApiResponse<DefaultResponseMsg>) => {
     try {
@@ -48,4 +49,4 @@ const endpointComments = async (req: NextApiRequest, res: NextApiResponse<Defaul
     }
 }
 
-export default JWTTokenValidate(MongoDBconnect(endpointComments));
+export default CORSpolicy(JWTTokenValidate(MongoDBconnect(endpointComments)));

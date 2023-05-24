@@ -5,6 +5,7 @@ import { PublicationModel } from "../../models/PublicationModel";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { UserModel } from "../../models/UserModel";
 import { FollowerModel } from "../../models/FollowerModel";
+import { CORSpolicy } from "../../middlewares/CORSpolicy";
 
 const endpointFeed = async (
     req: NextApiRequest,
@@ -80,4 +81,4 @@ const endpointFeed = async (
     }
 }
 
-export default JWTTokenValidate(MongoDBconnect(endpointFeed));
+export default CORSpolicy(JWTTokenValidate(MongoDBconnect(endpointFeed)));
