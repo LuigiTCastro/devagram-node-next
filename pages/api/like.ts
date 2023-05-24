@@ -28,6 +28,10 @@ const endpointLike = async (req: NextApiRequest, res: NextApiResponse<DefaultRes
             const userIndexOnLike = publication.likes.findIndex((e: any) => e.toString() === user._id.toString());
             // DOUBT: pq 'user._id'? | '.toStr()' pois eles sao ObjectId (?)
             // 'likes' is an array of usersId.
+            // When the findIndex function finds something, it returns a value >= 0.
+            // But when the findIndex function does not finds nothing, it returns a value = -1.
+
+            // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global
 
             if (userIndexOnLike != -1) {
                 // if index is bigger than -1: the user already liked the publication.
