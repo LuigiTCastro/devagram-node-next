@@ -168,6 +168,22 @@ Os métodos HTTP mais comuns são:
 Ao enviar uma requisição, o cliente deve especificar o método HTTP correto para indicar a operação desejada (geralmente incluída no cabeçalho da requisição).
 
 
+# CORS POLICY [Cross-OriginResourceSharing]
+Mecanismo usado para adicionar cabeçalhos HTTP que informam aos navegadores para permitir que uma aplicação Web seja executada em uma origem e acesse recursos de outra origem diferente. Esse tipo de ação é chamada de requisição cross-origin HTTP.
+
+It works for that resources from different origins can communicate each other on browsers.
+The responsibility for setting Cors policy usually rests with the API.
+
+_Different resources working on the same server do not need Cors configuration._ <!-- (Just rescourse from different origins) -->
+
+[...]
+
+
+# DEPLOY (CLOUD)
+Vercel, GitHub, Envs...
+Postman: in ``NoEnvironment`` (add: environment name, variable, value); after, switch between the environments.
+[...]
+
 
 
 
