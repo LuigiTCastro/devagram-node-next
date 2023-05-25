@@ -3,7 +3,6 @@ import { DefaultResponseMsg } from "../types/DefaultResponseMsg";
 import NextCors from 'nextjs-cors';
 
 // Como se trata de um middleware, é necessário receber o handler primeiro.
-// Se fosse direto pro request, seria um endpoint.
 // CORS: Cross-Origin
 export const CORSpolicy = (handler: NextApiHandler) =>
     async (req: NextApiRequest, res: NextApiResponse<DefaultResponseMsg>) => {
