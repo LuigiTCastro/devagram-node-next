@@ -26,8 +26,8 @@ const endpointFeed = async (
                 }   
                 
                 const publications = await PublicationModel
-                    .find({ userId: user._id }) // Enquanto FINDBYID busca uma informação, FIND busca uma lista de informações.
-                    .sort({ date: -1 }); // Sort: ordenar.
+                    .find({ userId: user._id })
+                    .sort({ date: -1 });
 
                 return res.status(200).json(publications);
             }
@@ -51,17 +51,14 @@ const endpointFeed = async (
                     ]
                 })
                 .sort({ data : -1 })
-                // In the relational database, its possible to sort in ASC or DESC.
-                // But in the non-relational database, to sort, its necessary to use the numbers 1 / -1
-                // 1: ASC | -1: DESC (in case of date, it means from the most recent date to the oldest date).
 
                 const result = [];
 
-                for(const publi of publications) { // Itera todos os objetos json da collection publications, retornando as publi individualmente.
-                    const publicationUser = await UserModel.findById(publi.userId); // Busca o usuario da publicaçao (publi por publi).
+                for(const publi of publications) {
+                    const publicationUser = await UserModel.findById(publi.userId);
 
                     if(publicationUser) {
-                        const final = {...publi._doc, user : { // Retorna o json de cada publi e anexado a esta um novo json (...) nomeado de 'user' que traz consigo o nome e o avatar do usuario da publicacao.
+                        const final = {...publi._doc, user : {
                             name : publicationUser.name,
                             avatar : publicationUser.avatar
                         }};

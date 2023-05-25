@@ -13,12 +13,12 @@ export const JWTTokenValidate = (handler : NextApiHandler) => async (
         return res.status(200).json({ error : 'ENV JWT key not informed on the process execution.'});
         }
 
-        if(!req || !req.headers) { // Checks if the request/request header are empty.
+        if(!req || !req.headers) {
             return res.status(401).json({ error : 'It was not possible validate the access token.'});
         }
 
-        if(req.method !== 'OPTIONS') { // HTTP method: 
-            const authorization = req.headers['authorization']; //
+        if(req.method !== 'OPTIONS') {
+            const authorization = req.headers['authorization'];
             if(!authorization) {
                 return res.status(401).json({ error : 'It was not possible validate the access token.'});
             }
@@ -28,7 +28,7 @@ export const JWTTokenValidate = (handler : NextApiHandler) => async (
                 return res.status(401).json({ error : 'It was not possible validate the access token.'});
             }
 
-            const decoded = await jwt.verify(token, MY_KEY_JWT) as JwtPayload; // JwtPayload: jwt object.
+            const decoded = await jwt.verify(token, MY_KEY_JWT) as JwtPayload;
             if(!decoded) {
                 return res.status(401).json({ error : 'It was not possible validate the access token.'});
             }
@@ -48,6 +48,3 @@ export const JWTTokenValidate = (handler : NextApiHandler) => async (
     
     return handler(req, res);
 }
-
-
-// token ativo = usuario autenticado OU usuario LOGADO! (quem esta fazendo as açoes).
