@@ -11,7 +11,7 @@ import type {NextApiResponse} from 'next';
 import nc from 'next-connect';
 
 const handler = nc()
-    .use(upload.single('file')) // upload do multer. 'file': name of the field to pass as key in the form-data (postman).
+    .use(upload.single('file'))
     .post(async (req : any, res : NextApiResponse<DefaultResponseMsg>) => {
         
         try{

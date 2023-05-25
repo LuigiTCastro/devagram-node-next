@@ -30,7 +30,7 @@ const handler = nc()
             const { file } = req;
 
             if (file && file.originalname) {
-                // user.file = file;
+
                 const image = await imagesUploadCosmic(req);
 
                 if (image && image.media && image.media.url) {
@@ -72,4 +72,4 @@ export const config = {
     }
 }
 
-export default CORSpolicy(JWTTokenValidate(MongoDBconnect(handler))); // first validate token, after authenticate the user.
+export default CORSpolicy(JWTTokenValidate(MongoDBconnect(handler)));

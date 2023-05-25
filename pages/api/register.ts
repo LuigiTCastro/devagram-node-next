@@ -5,14 +5,14 @@ import { DefaultResponseMsg } from '../../types/DefaultResponseMsg';
 import { RegisterUserRequest } from '../../types/RegisterUserRequest';
 import { UserModel } from '../../models/UserModel';
 import { MongoDBconnect } from '../../middlewares/MongoDBconnect';
-import { upload, imagesUploadCosmic } from '../../services/imagesUploadCosmic'; // Upload do Multer, Upload da imagem pro cosmic.
+import { upload, imagesUploadCosmic } from '../../services/imagesUploadCosmic';
 import md5 from 'md5';
 import nc from 'next-connect';
 import { CORSpolicy } from '../../middlewares/CORSpolicy';
 
-const handler = nc() // handler: endpoint that receives an next-connect instance.
-    .use(upload.single('file')) // upload: midleware from multer. single: accepts just one image. 'file': name of the field to pass as key in the form-data (postman) 
-    .post(async ( // post: http method that plug to endpoint.
+const handler = nc()
+    .use(upload.single('file'))
+    .post(async (
         req: NextApiRequest,
         res: NextApiResponse<DefaultResponseMsg>
     ) => {
@@ -34,23 +34,19 @@ const handler = nc() // handler: endpoint that receives an next-connect instance
                 return res.status(400).json({ error: 'Password not valid.' });
             }
 
-            // validation if already exists an user with same email
             const usersWithSameEmail = await UserModel.find({ email: user.email });
 
             if (usersWithSameEmail && usersWithSameEmail.length > 0) {
                 return res.status(400).json({ error: 'An user with the same email already exists.' });
             }
 
-            // send the image from multer to the cosmic
             const image = await imagesUploadCosmic(req);
-            // this function gets the raw data contained in the properties of FILE and transforms in a Cosmic OBJECT including informations as MEDIA and URL.
 
-            // save in the database
             const userToBeSaved = {
                 name: user.name,
                 email: user.email,
                 password: md5(user.password),
-                avatar: image?.media?.url // thanks to the above function, image can to get the media and url.
+                avatar: image?.media?.url
             }
 
             await UserModel.create(userToBeSaved);
@@ -62,12 +58,10 @@ const handler = nc() // handler: endpoint that receives an next-connect instance
         }
     });
 
-export const config = { // exporta-se essa config para alterar configuraçao padrao do next
+export const config = {
     api: {
-        bodyParser: false // o bodyParser faz com que nesta api, o Next não transforme o request em json automaticamente.
+        bodyParser: false
     }
-}   // com isso, torna-se necessario passar no body (no postman) FORM-DATA em vez de RAW(JSON).
-// alem disso, FORM-DATA trabalha com CHAVE-VALOR.
-// importante lembrar de passar a chave FILE.
+}
 
-export default CORSpolicy(MongoDBconnect(handler)); // Connect with db before registering user.
+export default CORSpolicy(MongoDBconnect(handler));

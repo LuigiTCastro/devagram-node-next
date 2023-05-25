@@ -11,7 +11,7 @@ import { CORSpolicy } from "../../middlewares/CORSpolicy";
 
 const endpointLogin = async (
     req: NextApiRequest,
-    res: NextApiResponse<DefaultResponseMsg | LoginResponse> // <...> force the response element to be of the determined type.
+    res: NextApiResponse<DefaultResponseMsg | LoginResponse>
 ) => {
 
     const { MY_KEY_JWT } = process.env;
@@ -36,11 +36,11 @@ const endpointLogin = async (
                 token
             });
 
-            // return res.status(200).json({ msg : `The user ${userFound.name} was authenticated successfully!` }); // 200: status code OK       
+            // return res.status(200).json({ msg : `The user ${userFound.name} was authenticated successfully!` });
         }
-        return res.status(400).json({ error: 'User or password not found.' }); // 400: bad request
+        return res.status(400).json({ error: 'User or password not found.' });
     }
-    return res.status(405).json({ error: 'Informed method is not valid.' }); // 405: action not allowed
+    return res.status(405).json({ error: 'Informed method is not valid.' });
 }
 
-export default CORSpolicy(MongoDBconnect(endpointLogin)); // first middleware, after endpoint.
+export default CORSpolicy(MongoDBconnect(endpointLogin)); 
